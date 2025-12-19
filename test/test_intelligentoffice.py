@@ -14,3 +14,21 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_pin_11.return_value = True
         io = IntelligentOffice()
         self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN1))
+
+    @patch.object(GPIO, "input")
+    def test_worker_in_room_pin12(self, mock_pin_2: Mock):
+        mock_pin_2.return_value = True
+        io = IntelligentOffice()
+        self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN2))
+
+    @patch.object(GPIO, "input")
+    def test_worker_in_room_pin13(self, mock_pin_3: Mock):
+        mock_pin_3.return_value = True
+        io = IntelligentOffice()
+        self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN3))
+
+    @patch.object(GPIO, "input")
+    def test_worker_in_room_pin15(self, mock_pin_4: Mock):
+        mock_pin_4.return_value = True
+        io = IntelligentOffice()
+        self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN4))

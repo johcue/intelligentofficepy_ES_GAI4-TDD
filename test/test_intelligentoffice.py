@@ -125,3 +125,4 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_gpio_output.assert_called_with(io.BUZZER_PIN, False)
         self.assertFalse(io.buzzer_on)
 
+

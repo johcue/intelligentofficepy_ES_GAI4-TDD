@@ -32,3 +32,9 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_pin_4.return_value = True
         io = IntelligentOffice()
         self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN4))
+
+    @patch.object(GPIO, "input")
+    def test_wrong_pin_error(self, mock_pin_11: Mock):
+        mock_pin_11.return_value = True
+        io = IntelligentOffice()
+        self.assertRaises(IntelligentOfficeError, io.check_quadrant_occupancy, 14)

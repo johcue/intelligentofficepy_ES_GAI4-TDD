@@ -86,11 +86,13 @@ class IntelligentOffice:
             GPIO.output(self.LED_PIN, GPIO.LOW)
             self.light_on = False
 
-
-
     def monitor_air_quality(self) -> None:
-        # To be implemented
-        pass
+        if GPIO.input(self.GAS_PIN) == GPIO.LOW:
+            GPIO.output(self.BUZZER_PIN, GPIO.HIGH)
+            self.buzzer_on = True
+        else:
+            GPIO.output(self.BUZZER_PIN, GPIO.LOW)
+            self.buzzer_on = False
 
     def change_servo_angle(self, duty_cycle):
         """

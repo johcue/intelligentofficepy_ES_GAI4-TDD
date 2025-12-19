@@ -76,7 +76,8 @@ class IntelligentOffice:
 
     def manage_light_level(self) -> None:
         lux = self.ambient_light_sensor.lux
-        if lux <= 500:  # Adjusted condition to include 500
+        occupancy = any(self.check_quadrant_occupancy(pin) for pin in [self.INFRARED_PIN1, self.INFRARED_PIN2, self.INFRARED_PIN3, self.INFRARED_PIN4])
+        if lux <= 500 or occupancy:
             GPIO.output(self.LED_PIN, True)
             self.light_on = True
         else:

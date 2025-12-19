@@ -13,4 +13,4 @@ class TestIntelligentOffice(unittest.TestCase):
     def test_worker_in_room_pin11(self, mock_pin_11: Mock):
         mock_pin_11.return_value = True
         io = IntelligentOffice()
-        self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN1)
+        self.assertTrue(io.check_quadrant_occupancy(io.INFRARED_PIN1))

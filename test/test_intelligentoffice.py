@@ -38,3 +38,10 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_pin_11.return_value = True
         io = IntelligentOffice()
         self.assertRaises(IntelligentOfficeError, io.check_quadrant_occupancy, 14)
+
+    @patch.object(SDL_DS3231, "read_datetime")
+    def test_blinds_fully_open_weekday(self, mock_datetime: Mock):
+        mock_datetime.return_value = datetime(2025, 12, 19, 7, 10)
+        io = IntelligentOffice()
+        io.manage_blinds_based_on_time()
+        self.assertTrue(io.blinds_open)

@@ -65,4 +65,13 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_datetime.return_value = datetime(2025, 12, 19, 17, 59)
         io = IntelligentOffice()
         io.manage_blinds_based_on_time()
-        self.assertFalse(io.blinds_open)
+        self.assertTrue(io.blinds_open)
+
+    @patch.object(GPIO, "output")
+    @patch.object(VEML7700, "lux", new_callable=PropertyMock)
+    def test_light_on_lux(self, mock_lux: Mock, mock_led):
+        mock_lux.side_effect = [501]
+        io = IntelligentOffice()
+        io.manage_light_level()
+        mock_led.assert_called_with(io.LED_PIN, True)
+        self.assertTrue(io.light_on)

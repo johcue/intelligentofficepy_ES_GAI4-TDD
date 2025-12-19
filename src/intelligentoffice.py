@@ -63,9 +63,14 @@ class IntelligentOffice:
             raise IntelligentOfficeError()
 
     def manage_blinds_based_on_time(self) -> None:
-        self.blinds_open = True
-        duty_cycle = (180 / 18) + 2
-        self.change_servo_angle(duty_cycle)
+        if self.rtc.read_datetime().weekday() in [0, 1, 2, 3, 4]:
+            self.blinds_open = True
+            duty_cycle = (180 / 18) + 2
+            self.change_servo_angle(duty_cycle)
+        else:
+            self.blinds_open = False
+            duty_cycle = (0 / 18) + 2
+            self.change_servo_angle(duty_cycle)
 
     def manage_light_level(self) -> None:
         # To be implemented
